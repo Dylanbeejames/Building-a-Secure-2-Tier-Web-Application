@@ -16,23 +16,28 @@ This architecture models real‑world cloud deployments where front‑end and ba
 
 🧱 Architecture Diagram (Conceptual)
 Code
-                Internet
-                    |
-            [ Public IP: 20.121.42.64 ]
-                    |
-            ---------------------------
-            |        snet-web         |
-            |       10.0.1.0/24       |
-            |       vm-web-01         |
-            ---------------------------
-                    |
-        (Private VNet Communication)
-                    |
-            ---------------------------
-            |        snet-db          |
-            |       10.0.2.0/24       |
-            |   vm-db-01 (10.0.2.5)   |
-            ---------------------------
+                          ┌──────────────────────────┐
+                          │        Internet          │
+                          └─────────────┬────────────┘
+                                        │
+                          [ Public IP: 20.121.42.64 ]
+                                        │
+                    ┌────────────────────────────────────────┐
+                    │               snet-web                 │
+                    │             10.0.1.0/24                │
+                    │                                        │
+                    │            vm-web-01                   │
+                    └────────────────────────────────────────┘
+                                        │
+                           (Private VNet Communication)
+                                        │
+                    ┌────────────────────────────────────────┐
+                    │                snet-db                 │
+                    │              10.0.2.0/24               │
+                    │                                        │
+                    │        vm-db-01 (10.0.2.5)             │
+                    └────────────────────────────────────────┘
+
 🎯 Objectives
 Deploy a secure 2‑tier Azure environment
 
