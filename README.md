@@ -1,3 +1,7 @@
+Watch Me Build The Lab HERE
+
+https://www.loom.com/share/6613a59b3aea4c168d60100e2f4f6383
+
 Building a Secure 2‑Tier Web Application (Azure IaaS)
 Course Author: Dylan Bryson 
 📌 Overview
