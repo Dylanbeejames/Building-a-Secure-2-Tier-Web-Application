@@ -14,29 +14,21 @@ A Network Security Group (NSG) restricting DB access so only the Web subnet can 
 
 This architecture models real‑world cloud deployments where front‑end and back‑end systems must be isolated and protected.
 
-🧱 Architecture Diagram (Conceptual)
-Code
-                          ┌──────────────────────────┐
-                          │        Internet          │
-                          └─────────────┬────────────┘
-                                        │
-                          [ Public IP: 20.121.42.64 ]
-                                        │
-                    ┌────────────────────────────────────────┐
-                    │               snet-web                 │
-                    │             10.0.1.0/24                │
-                    │                                        │
-                    │            vm-web-01                   │
-                    └────────────────────────────────────────┘
-                                        │
-                           (Private VNet Communication)
-                                        │
-                    ┌────────────────────────────────────────┐
-                    │                snet-db                 │
-                    │              10.0.2.0/24               │
-                    │                                        │
-                    │        vm-db-01 (10.0.2.5)             │
-                    └────────────────────────────────────────┘
+flowchart TD
+
+    Internet(["🌐 Internet"])
+    PublicIP["Public IP: 20.121.42.64"]
+
+    subgraph WebSubnet["snet-web (10.0.1.0/24)"]
+        WebVM["vm-web-01"]
+    end
+
+    subgraph DBSubnet["snet-db (10.0.2.0/24)"]
+        DBVM["vm-db-01 (10.0.2.5)"]
+    end
+
+    Internet --> PublicIP --> WebSubnet
+    WebSubnet -->|"Private VNet Communication"| DBSubnet
 
 🎯 Objectives
 Deploy a secure 2‑tier Azure environment
