@@ -1,12 +1,12 @@
-Lab Title: Building a Secure 2‑Tier Web Application
-
+Building a Secure 2‑Tier Web Application (Azure IaaS)
+Course Author: Dylan Bryson 
 📌 Overview
 This project demonstrates how to build a secure 2‑tier IaaS architecture in Microsoft Azure.
 The design includes:
 
-A public subnet hosting a Web Server (vm‑web‑01)
+A public subnet hosting a Web Server (vm-web-01)
 
-A private subnet hosting a Database Server (vm‑db‑01)
+A private subnet hosting a Database Server (vm-db-01)
 
 A Virtual Network (VNet) connecting both tiers
 
@@ -18,21 +18,21 @@ This architecture models real‑world cloud deployments where front‑end and ba
 Code
                 Internet
                     |
-            [ Public IP ]
+            [ Public IP: 20.121.42.64 ]
                     |
-            -----------------
-            |   snet-web    |
-            | 10.0.1.0/24   |
-            | vm-web-01     |
-            -----------------
+            ---------------------------
+            |        snet-web         |
+            |       10.0.1.0/24       |
+            |       vm-web-01         |
+            ---------------------------
                     |
         (Private VNet Communication)
                     |
-            -----------------
-            |   snet-db     |
-            | 10.0.2.0/24   |
-            | vm-db-01      |
-            -----------------
+            ---------------------------
+            |        snet-db          |
+            |       10.0.2.0/24       |
+            |   vm-db-01 (10.0.2.5)   |
+            ---------------------------
 🎯 Objectives
 Deploy a secure 2‑tier Azure environment
 
@@ -59,7 +59,7 @@ Azure Portal
 
 📐 Phase 1 — Create the Network Foundation
 Resources Created
-Resource Group: rg-lab02-[yourname]
+Resource Group: rg-lab02-dylan
 
 VNet: vnet-lab02
 
@@ -83,7 +83,7 @@ Authentication: SSH Key (key-lab02.pem)
 
 Subnet: snet-web
 
-Public IP: Enabled
+Public IP: 20.121.42.64
 
 Inbound Ports:
 
@@ -93,7 +93,7 @@ HTTP (80)
 
 SSH Command
 bash
-ssh -i key-lab02.pem azureuser@<web-public-ip>
+ssh -i key-lab02.pem azureuser@20.121.42.64
 This VM acts as the entry point into the environment.
 
 🗄️ Phase 3 — Deploy the Database Server (vm‑db‑01)
@@ -106,6 +106,8 @@ Authentication: Same SSH key
 
 Subnet: snet-db
 
+Private IP: 10.0.2.5
+
 Public IP: None (Private-only server)
 
 This ensures the DB server is isolated from the internet.
@@ -114,11 +116,11 @@ This ensures the DB server is isolated from the internet.
 SSH into the web server:
 
 bash
-ssh -i key-lab02.pem azureuser@<web-public-ip>
+ssh -i key-lab02.pem azureuser@20.121.42.64
 Ping the DB server’s private IP:
 
 bash
-ping 10.0.2.x
+ping 10.0.2.5
 Successful replies confirm the VNet and subnets are configured correctly.
 
 🛡️ Phase 5 — Configure the Firewall (NSG)
@@ -141,7 +143,7 @@ To remove all resources:
 
 Go to Resource Groups
 
-Delete: rg-lab02-[yourname]
+Delete: rg-lab02-dylan
 
 This deletes the entire lab environment.
 
@@ -155,3 +157,5 @@ Use subnets to isolate workloads
 Use NSGs to enforce least‑privilege access
 
 Validate internal connectivity using SSH and ping
+
+This is a foundational cloud architecture pattern used in real production environments.
