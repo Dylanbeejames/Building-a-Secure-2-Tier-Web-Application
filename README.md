@@ -35,38 +35,6 @@ This models **real-world cloud deployments** where front-end and back-end system
 - Network Security Groups (NSGs)  
 - Azure Portal  
 
----
-
-## 📐 Architecture Diagram
-
-```mermaid
-flowchart TD
-Internet(["🌐 Internet"])
-PublicIP["Public IP: 20.121.42.64"]
-
-subgraph WebSubnet["snet-web (10.0.1.0/24)"]
-    WebVM["vm-web-01"]
-end
-
-subgraph DBSubnet["snet-db (10.0.2.0/24)"]
-    DBVM["vm-db-01 (10.0.2.5)"]
-end
-
-Internet --> PublicIP --> WebSubnet
-WebSubnet -->|"Private VNet Communication"| DBSubnet
-
-📌 Phase 1 — Network Foundation
-
-Resources Created:
-
-Resource Group: rg-lab02-dylan
-VNet: vnet-lab02 (10.0.0.0/16)
-Subnets:
-snet-web → 10.0.1.0/24 (Public)
-snet-db → 10.0.2.0/24 (Private)
-
-This establishes the network boundaries for the web and database tiers.
-
 🌐 Phase 2 — Deploy the Web Server (vm-web-01)
 Image: Ubuntu Server 20.04 LTS
 Size: Standard_B1s
