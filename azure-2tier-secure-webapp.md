@@ -1,7 +1,6 @@
 # Building a Secure 2-Tier Web Application on Azure (IaaS)
 
-**Author:** Dylan  
-**Role:** Cloud Security Specialist  
+**Author:** Dylan   
 **Video Walkthrough:** [▶ Watch on Loom](https://www.loom.com/share/6613a59b3aea4c168d60100e2f4f6383)
 
 ---
